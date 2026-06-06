@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { Menu } from "lucide-react";
 
 import { sidebarConfig } from "@/data/sidebar";
+import { useWorkspace } from "@/hooks/useWorkspace";
 import { SidebarLogo } from "./SidebarLogo";
 import { SidebarSkeleton } from "./SidebarSkeleton";
 import { SidebarSection } from "./SidebarSection";
@@ -15,7 +16,8 @@ const sidebarSkeletonSeenKey = "bitscale.sidebar.skeleton.seen";
 export function Sidebar() {
   const [loading, setLoading] = useState(true);
   const [isMobileOpen, setIsMobileOpen] = useState(false);
-  const { brand, workspace, sections, support } = sidebarConfig;
+  const { brand, sections, support } = sidebarConfig;
+  const { workspace } = useWorkspace();
 
   useEffect(() => {
     const hasSeenSkeleton = (() => {
