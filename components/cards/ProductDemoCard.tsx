@@ -1,4 +1,5 @@
-import { Circle, CircleCheck, ClipboardCheck } from "lucide-react";
+import Image from "next/image";
+import { Circle, CircleCheck } from "lucide-react";
 
 import { dashboardConfig } from "@/data/dashboard";
 
@@ -8,9 +9,13 @@ export function ProductDemoCard() {
   return (
     <div className="dashboard-card dashboard-card--demo">
       <div className="product-demo-header">
-        <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-button-dark">
-          <ClipboardCheck
-            className="h-[18px] w-[18px] text-background"
+        <span className="product-demo-icon">
+          <Image
+            src="/file-check.png"
+            alt=""
+            width={18}
+            height={18}
+            className="product-demo-icon__image"
             aria-hidden="true"
           />
         </span>

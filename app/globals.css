@@ -124,6 +124,7 @@
   --product-demo-subtitle-color: #383530;
   --product-demo-progress-color: #438361;
   --product-demo-progress-height: 4px;
+  --product-demo-icon-bg: #4b5563;
   --checklist-icon-size: 14px;
   --checklist-icon-stroke: 1.4;
   --checklist-icon-color: #347fa9;
@@ -837,6 +838,23 @@ button:disabled,
   display: flex;
   align-items: flex-start;
   gap: var(--dashboard-card-inner-gap);
+}
+
+.product-demo-icon {
+  display: flex;
+  height: 36px;
+  width: 36px;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-full);
+  background-color: var(--product-demo-icon-bg);
+}
+
+.product-demo-icon__image {
+  height: 18px;
+  width: 18px;
+  object-fit: contain;
 }
 
 .product-demo-title {
