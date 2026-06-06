@@ -146,7 +146,7 @@ export function FilterPanel({
   headerAction,
 }: FilterPanelProps) {
   return (
-    <div className="ml-8 mt-8 mb-[18px] flex h-[668px] w-[319px] shrink-0 flex-col bg-background pl-2">
+    <div className="lead-search-filter-panel ml-8 mt-8 mb-[18px] flex h-[668px] w-[319px] shrink-0 flex-col bg-background pl-2">
       {title || headerAction ? (
         <div className="flex shrink-0 items-center justify-between gap-[5px] px-4 pb-3 pt-0 mt-[-2px]">
           {title ? (
@@ -170,7 +170,7 @@ export function FilterPanel({
         ))}
       </div>
       <div className="flex shrink-0 justify-center py-3">
-        <div className="flex h-[34px] w-[314px] items-center gap-4">
+        <div className="lead-search-filter-footer flex h-[34px] w-[314px] items-center gap-4">
           {footer}
         </div>
       </div>

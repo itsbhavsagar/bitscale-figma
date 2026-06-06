@@ -1,8 +1,17 @@
-export function SidebarSkeleton() {
+interface SidebarSkeletonProps {
+  className?: string;
+}
+
+export function SidebarSkeleton({ className = "" }: SidebarSkeletonProps) {
   const navRowWidths = ["75%", "88%", "68%", "82%"];
 
   return (
-    <aside className="dashboard-sidebar flex h-screen flex-col border-r border-border bg-sidebar-bg">
+    <aside
+      className={[
+        "dashboard-sidebar flex h-screen flex-col border-r border-border bg-sidebar-bg",
+        className,
+      ].join(" ")}
+    >
       <div className="border-b border-border px-4 py-4">
         <div className="h-[22px] w-[120px] animate-pulse rounded-sm bg-gray-100" style={{ animationDelay: "40ms" }} />
       </div>

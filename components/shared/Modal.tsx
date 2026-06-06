@@ -56,7 +56,7 @@ export function Modal({
     <AnimatePresence>
       {open ? (
         <motion.div
-          className="fixed inset-0 z-50 flex items-center justify-center p-4"
+          className="modal-overlay fixed inset-0 z-50 flex items-center justify-center p-4"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
@@ -78,7 +78,7 @@ export function Modal({
             aria-labelledby={title ? "modal-title" : undefined}
             aria-describedby={descriptionId}
             className={[
-              "relative z-10 flex flex-col overflow-hidden rounded-lg bg-white shadow-[0_1px_2px_0_rgba(0,0,0,0.08)]",
+              "modal-panel relative z-10 flex flex-col overflow-hidden rounded-lg bg-white shadow-[0_1px_2px_0_rgba(0,0,0,0.08)]",
               sizeClasses[size],
             ].join(" ")}
             initial={{ opacity: 0, scale: 0.98, y: 8 }}

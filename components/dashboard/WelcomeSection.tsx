@@ -15,7 +15,7 @@ export function WelcomeSection({ onAction }: WelcomeSectionProps) {
         <p className="section-subtitle mt-1">{subtitle}</p>
       </div>
 
-      <div className="flex shrink-0 items-center gap-2">
+      <div className="welcome-actions flex shrink-0 items-center gap-2">
         {actions.map((action) => {
           const Icon = action.icon;
           const isPrimary = action.variant === "primary";

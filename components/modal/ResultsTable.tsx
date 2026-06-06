@@ -196,7 +196,7 @@ export function ResultsTable({
       <AnimatePresence>
         {selectedRow ? (
           <motion.aside
-            className="absolute inset-y-0 right-0 z-20 w-[280px] border-l border-border bg-background p-4 shadow-[-4px_0_12px_rgba(0,0,0,0.08)]"
+            className="results-details-panel absolute inset-y-0 right-0 z-20 w-[280px] border-l border-border bg-background p-4 shadow-[-4px_0_12px_rgba(0,0,0,0.08)]"
             initial={{ x: 24, opacity: 0 }}
             animate={{ x: 0, opacity: 1 }}
             exit={{ x: 24, opacity: 0 }}

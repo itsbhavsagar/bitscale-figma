@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Inter, Lato } from "next/font/google";
 
 import "./globals.css";
@@ -20,6 +20,11 @@ const lato = Lato({
 export const metadata: Metadata = {
   title: "Bitscale",
   description: "Bitscale dashboard application",
+};
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
 };
 
 export default function RootLayout({

@@ -128,7 +128,7 @@ export function LeadSearchModal({
 
   return (
     <Modal open={open} onClose={handleClose} size="xl" hideHeader title={title}>
-      <div className="mt-3 flex h-full items-start overflow-hidden">
+      <div className="lead-search-modal mt-3 flex h-full items-start overflow-hidden">
         <FilterPanel
           title={title}
           headerAction={
@@ -158,7 +158,7 @@ export function LeadSearchModal({
           }
         />
 
-        <div className="ml-5 mt-[34px] flex h-[560px] w-[623px] min-w-0 shrink-0 flex-col gap-2">
+        <div className="lead-search-results ml-5 mt-[34px] flex h-[560px] w-[623px] min-w-0 shrink-0 flex-col gap-2">
           <div className="results-info">
             <div className="results-info__badge-row">
               <Badge variant="neutral" className="results-info__badge">
@@ -181,7 +181,7 @@ export function LeadSearchModal({
             ) : null}
           </div>
 
-          <div className="flex h-[608px] flex-col overflow-hidden rounded-lg border border-border bg-background shadow-[0_1px_2px_0_rgba(0,0,0,0.08)]">
+          <div className="lead-search-results-card flex h-[608px] flex-col overflow-hidden rounded-lg border border-border bg-background shadow-[0_1px_2px_0_rgba(0,0,0,0.08)]">
             {previewState === "idle" ? (
               <div className="flex flex-1 items-center justify-center overflow-hidden">
                 <div className="flex h-[254px] w-[411px] items-center justify-center">

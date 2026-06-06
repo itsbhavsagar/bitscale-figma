@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { Menu } from "lucide-react";
 
 import { sidebarConfig } from "@/data/sidebar";
 import { SidebarLogo } from "./SidebarLogo";
@@ -13,6 +14,7 @@ const sidebarSkeletonSeenKey = "bitscale.sidebar.skeleton.seen";
 
 export function Sidebar() {
   const [loading, setLoading] = useState(true);
+  const [isMobileOpen, setIsMobileOpen] = useState(false);
   const { brand, workspace, sections, support } = sidebarConfig;
 
   useEffect(() => {
@@ -40,14 +42,34 @@ export function Sidebar() {
     return () => window.clearTimeout(timer);
   }, []);
 
-  if (loading) return <SidebarSkeleton />;
+  useEffect(() => {
+    if (!isMobileOpen) return;
+
+    const handleResize = () => {
+      if (window.innerWidth > 1024) {
+        setIsMobileOpen(false);
+      }
+    };
+
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, [isMobileOpen]);
 
   const handleOpenCommandPalette = () => {
     window.dispatchEvent(new Event("bitscale:command-palette-open"));
   };
 
-  return (
-    <aside className="dashboard-sidebar flex h-screen flex-col border-r border-border bg-sidebar-bg">
+  const sidebar = loading ? (
+    <SidebarSkeleton
+      className={isMobileOpen ? "dashboard-sidebar--mobile-open" : ""}
+    />
+  ) : (
+    <aside
+      className={[
+        "dashboard-sidebar flex h-screen flex-col border-r border-border bg-sidebar-bg",
+        isMobileOpen ? "dashboard-sidebar--mobile-open" : "",
+      ].join(" ")}
+    >
       <div className="border-b border-border px-4 py-4">
         <SidebarLogo brand={brand} />
       </div>
@@ -77,5 +99,28 @@ export function Sidebar() {
 
       <SupportCard brand={brand} support={support} />
     </aside>
+  );
+
+  return (
+    <>
+      <button
+        type="button"
+        className="sidebar-mobile-toggle"
+        aria-label="Open sidebar menu"
+        aria-expanded={isMobileOpen}
+        onClick={() => setIsMobileOpen(true)}
+      >
+        <Menu className="h-4 w-4" />
+      </button>
+      {isMobileOpen ? (
+        <button
+          type="button"
+          className="sidebar-mobile-backdrop"
+          aria-label="Close sidebar menu"
+          onClick={() => setIsMobileOpen(false)}
+        />
+      ) : null}
+      {sidebar}
+    </>
   );
 }

@@ -19,7 +19,7 @@ export function ViewToggle({ viewMode, onChange }: ViewToggleProps) {
       onClick={() => onChange(isCompact ? "table" : "compact")}
       aria-label={isCompact ? "Switch to table view" : "Switch to compact view"}
       title={isCompact ? "Table view" : "Compact view"}
-      className="h-(--search-input-height)! w-(--search-input-height)! border-border! bg-gray-100! hover:bg-[#ECEEF0]!"
+      className="view-toggle-button h-(--search-input-height)! w-(--search-input-height)! border-border! bg-gray-100! hover:bg-[#ECEEF0]!"
     >
       {isCompact ? (
         <LayoutGrid className="h-4 w-4" />
