@@ -18,10 +18,8 @@
   --gray-800: #1f2a37;
   --star-active: #f59e0b;
   --surface-muted: #fafafa;
-  --success-green: #16a34a;
   --badge-green-bg: #edf2eb;
   --badge-green-text: #428360;
-  --badge-green-border: #c8dacd;
   --badge-plan-bg: #428360;
   --table-header-bg: var(--background);
 
@@ -37,7 +35,6 @@
   --platform-apollo: #f59e0b;
 
   --card-bg: #f8fbfd;
-  --card-demo-bg: #ffffff;
 
   --sidebar-bg: #ffffff;
 
@@ -77,8 +74,6 @@
   --letter-spacing-navigation: 0px;
 
   --sidebar-width: 224px;
-  --content-width: 1056px;
-  --dashboard-content-height: 786px;
   --dashboard-header-height: 54.8px;
   --dashboard-content-padding-x: 24px;
   --dashboard-content-padding-y: 20px;
@@ -140,8 +135,6 @@
   --sidebar-nav-active-bg: var(--gray-100);
   --sidebar-nav-active-color: var(--primary-blue);
   --sidebar-nav-inactive-color: #1f2a37;
-  --sidebar-support-bg: var(--gray-100);
-  --support-card-min-height: 72px;
   --workspace-row-padding-y: 12px;
 
   
@@ -227,13 +220,6 @@ button:disabled,
   gap: 20px;
   border-bottom: 1px solid var(--border-color);
   padding: 0 24px;
-}
-
-.header-actions {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  gap: 24px;
 }
 
 .credits-pill {
@@ -955,12 +941,6 @@ button:disabled,
   background-color: var(--background);
 }
 
-.page-container {
-  width: 100%;
-  max-width: 100%;
-  padding: var(--spacing-6);
-}
-
 .welcome-title {
   font-family: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
   color: #1a202c;
@@ -1148,10 +1128,6 @@ button:disabled,
   color: #4b5563;
   margin-top: 2px;
   flex-shrink: 0;
-}
-
-.border-default {
-  border: 1px solid var(--border-color);
 }
 
 .search-input {
@@ -1418,20 +1394,6 @@ button:disabled,
 
 .table-body-wrapper thead th {
   background-color: var(--table-header-bg);
-}
-
-.table-scroll-wrapper {
-  flex: 1;
-  min-height: 0;
-  overflow-y: auto;
-  overflow-x: hidden;
-}
-
-.table-scroll-wrapper thead {
-  position: sticky;
-  top: 0;
-  z-index: 1;
-  background-color: var(--background);
 }
 
 .carousel-dot {
@@ -1925,8 +1887,7 @@ button:disabled,
     max-width: 100%;
   }
 
-  .table-body-wrapper,
-  .table-scroll-wrapper {
+  .table-body-wrapper {
     overflow-x: auto;
   }
 
@@ -2054,8 +2015,7 @@ button:disabled,
     width: 14%;
   }
 
-  .table-body-wrapper,
-  .table-scroll-wrapper {
+  .table-body-wrapper {
     overflow-x: hidden;
   }
 

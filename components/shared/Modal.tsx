@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, type ReactNode } from "react";
+import { createPortal } from "react-dom";
 import { AnimatePresence, motion } from "framer-motion";
 import { X } from "lucide-react";
 
@@ -52,7 +53,7 @@ export function Modal({
     };
   }, [open, onClose]);
 
-  return (
+  const modalContent = (
     <AnimatePresence>
       {open ? (
         <motion.div
@@ -64,7 +65,7 @@ export function Modal({
         >
           <motion.button
             type="button"
-            className="absolute inset-0 bg-black/40"
+            className="absolute inset-0 bg-[rgba(15,23,42,0.4)]"
             aria-label="Close modal"
             onClick={onClose}
             initial={{ opacity: 0 }}
@@ -133,4 +134,7 @@ export function Modal({
       ) : null}
     </AnimatePresence>
   );
+
+  if (typeof document === "undefined") return null;
+  return createPortal(modalContent, document.body);
 }

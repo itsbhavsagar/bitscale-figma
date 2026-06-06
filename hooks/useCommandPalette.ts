@@ -53,11 +53,6 @@ export function useCommandPalette({ actions }: UseCommandPaletteOptions) {
     setSelectedIndex(0);
   }, []);
 
-  const open = useCallback(() => {
-    setIsOpen(true);
-    setSelectedIndex(0);
-  }, []);
-
   const setSearchQuery = useCallback((value: string) => {
     setQuery(value);
     setSelectedIndex(0);
@@ -142,7 +137,6 @@ export function useCommandPalette({ actions }: UseCommandPaletteOptions) {
 
   return {
     isOpen,
-    open,
     close,
     query,
     setQuery: setSearchQuery,

@@ -8,7 +8,7 @@ export interface FilterSectionConfig {
   defaultOpen?: boolean;
 }
 
-export interface LeadFiltersConfig {
+interface LeadFiltersConfig {
   title: string;
   filters: FilterSectionConfig[];
   usage: {

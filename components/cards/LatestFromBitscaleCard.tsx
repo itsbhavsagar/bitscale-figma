@@ -90,6 +90,7 @@ export function LatestFromBitscaleCard() {
                 fill
                 className="object-cover"
                 sizes="152px"
+                loading={activeIndex === 0 ? "eager" : "lazy"}
               />
             ) : (
               <div

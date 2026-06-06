@@ -42,7 +42,6 @@ const workspaces: SidebarWorkspace[] = [
 interface WorkspaceContextValue {
   workspace: SidebarWorkspace;
   workspaces: SidebarWorkspace[];
-  isSwitching: boolean;
   switchSequence: number;
   toastMessage: string | null;
   clearToast: () => void;
@@ -159,7 +158,6 @@ export function useWorkspace() {
   return {
     workspace: snapshot.workspace,
     workspaces,
-    isSwitching: snapshot.isSwitching,
     switchSequence: snapshot.switchSequence,
     toastMessage: snapshot.toastMessage,
     clearToast,
