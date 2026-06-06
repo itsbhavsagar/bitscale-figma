@@ -21,6 +21,11 @@ const sizeClasses = {
   xl: "w-[1025px] max-w-[calc(100vw-32px)] h-[718px] max-h-[calc(100vh-32px)]",
 };
 
+const closeButtonBaseClass =
+  "inline-flex h-8 w-8 items-center justify-center rounded-full bg-[#E5E7EB] text-[#101828] hover:bg-[#DDE0E4]";
+
+const closeIconClass = "h-4 w-4 text-[#101828]";
+
 export function Modal({
   open,
   onClose,
@@ -102,10 +107,10 @@ export function Modal({
                 <button
                   type="button"
                   onClick={onClose}
-                  className="inline-flex h-8 w-8 items-center justify-center rounded-lg text-text-secondary hover:bg-[#F9FAFB]"
+                  className={closeButtonBaseClass}
                   aria-label="Close"
                 >
-                  <X className="h-4 w-4" />
+                  <X className={closeIconClass} />
                 </button>
               </div>
             )}
@@ -113,10 +118,13 @@ export function Modal({
               <button
                 type="button"
                 onClick={onClose}
-                className="absolute right-2 top-2 z-20 inline-flex h-8 w-8 items-center justify-center rounded-lg border border-border bg-white text-text-secondary shadow-sm hover:bg-[#F9FAFB]"
+                className={[
+                  "absolute right-2 top-2 z-20 shadow-sm",
+                  closeButtonBaseClass,
+                ].join(" ")}
                 aria-label="Close"
               >
-                <X className="h-4 w-4" />
+                <X className={closeIconClass} />
               </button>
             ) : null}
             {children}

@@ -42,6 +42,10 @@ export function Sidebar() {
 
   if (loading) return <SidebarSkeleton />;
 
+  const handleOpenCommandPalette = () => {
+    window.dispatchEvent(new Event("bitscale:command-palette-open"));
+  };
+
   return (
     <aside className="dashboard-sidebar flex h-screen flex-col border-r border-border bg-sidebar-bg">
       <div className="border-b border-border px-4 py-4">
@@ -56,6 +60,19 @@ export function Sidebar() {
         {sections.map((section) => (
           <SidebarSection key={section.id} section={section} />
         ))}
+      </div>
+
+      <div className="px-2 pb-2">
+        <div className="spinning-border">
+          <button
+            type="button"
+            onClick={handleOpenCommandPalette}
+            className="sidebar-command-trigger bg-white"
+          >
+            <span className="sidebar-command-trigger__title">Command Menu</span>
+            <span className="sidebar-command-trigger__hint">⌘K / Ctrl+K</span>
+          </button>
+        </div>
       </div>
 
       <SupportCard brand={brand} support={support} />

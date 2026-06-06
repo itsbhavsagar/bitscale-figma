@@ -142,14 +142,10 @@ export function LeadSearchModal({
           onChange={handleFilterChange}
           footer={
             <>
-              <Button
-                variant="ghost"
-                disabled
-                className="h-[34px] w-[120px] shrink-0 gap-2 whitespace-nowrap rounded-lg bg-gray-100 px-2 text-[14px] font-medium leading-[21px] text-text-primary shadow-none"
-              >
-                <FileSearch size={19} className="shrink-0 text-text-primary" />
+              <button type="button" className="btn-secondary">
+                <FileSearch className="btn-secondary__icon" style={{ strokeWidth: 2.15 }} />
                 Save Search
-              </Button>
+              </button>
               <Button
                 variant="primary"
                 onClick={handlePreview}

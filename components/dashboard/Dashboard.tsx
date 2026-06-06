@@ -1,6 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useMemo, useState } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
 
 import { LatestFromBitscaleCard } from "@/components/cards/LatestFromBitscaleCard";
 import { ProductDemoCard } from "@/components/cards/ProductDemoCard";
@@ -28,7 +29,13 @@ import { WelcomeSection } from "./WelcomeSection";
 type ModalId = "newGrid" | "findPeople" | "findCompanies";
 const dashboardSkeletonSeenKey = "bitscale.dashboard.skeleton.seen";
 
+function isModalId(value: string | null): value is ModalId {
+  return value === "newGrid" || value === "findPeople" || value === "findCompanies";
+}
+
 export function Dashboard() {
+  const router = useRouter();
+  const searchParams = useSearchParams();
   const [loading, setLoading] = useState(true);
   const { searchPlaceholder } = dashboardConfig;
 
@@ -37,10 +44,29 @@ export function Dashboard() {
   const [searchQuery, setSearchQuery] = useState("");
   const debouncedSearch = useDebouncedValue(searchQuery, 300);
   const [openModal, setOpenModal] = useState<ModalId | null>(null);
+  const requestedModal = (() => {
+    const modal = searchParams.get("modal");
+    return isModalId(modal) ? modal : null;
+  })();
+  const activeModal = openModal ?? requestedModal;
+
   const [toastMessage, setToastMessage] = useState<string | null>(null);
   const [expandedWorkbooks, setExpandedWorkbooks] = useState<Set<string>>(
     () => new Set(["workbook-1"]),
   );
+
+  const clearRequestedModalQuery = useCallback(() => {
+    if (!requestedModal) return;
+    const nextParams = new URLSearchParams(searchParams.toString());
+    nextParams.delete("modal");
+    const query = nextParams.toString();
+    router.replace(query ? `/?${query}` : "/", { scroll: false });
+  }, [requestedModal, router, searchParams]);
+
+  const closeModal = useCallback(() => {
+    setOpenModal(null);
+    clearRequestedModalQuery();
+  }, [clearRequestedModalQuery]);
 
   useEffect(() => {
     const hasSeenSkeleton = (() => {
@@ -146,9 +172,9 @@ export function Dashboard() {
     };
 
     setGrids((prev) => [newGrid, ...prev]);
-    setOpenModal(null);
+    closeModal();
     setToastMessage(`"${data.name.trim()}" created successfully`);
-  }, []);
+  }, [closeModal]);
 
   const handleWelcomeAction = useCallback((actionId: WelcomeActionId) => {
     if (actionId === "new-grid") setOpenModal("newGrid");
@@ -190,17 +216,17 @@ export function Dashboard() {
       </main>
 
       <NewGridModal
-        open={openModal === "newGrid"}
-        onClose={() => setOpenModal(null)}
+        open={activeModal === "newGrid"}
+        onClose={closeModal}
         onCreate={handleCreateGrid}
       />
       <FindPeopleModal
-        open={openModal === "findPeople"}
-        onClose={() => setOpenModal(null)}
+        open={activeModal === "findPeople"}
+        onClose={closeModal}
       />
       <FindCompaniesModal
-        open={openModal === "findCompanies"}
-        onClose={() => setOpenModal(null)}
+        open={activeModal === "findCompanies"}
+        onClose={closeModal}
       />
 
       <Toast

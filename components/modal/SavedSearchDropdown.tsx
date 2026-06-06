@@ -12,6 +12,8 @@ interface SavedSearchDropdownProps {
   onSelect: (preset: SavedSearchPreset) => void;
 }
 
+const dropdownTextClass = "text-[12px]";
+
 export function SavedSearchDropdown({
   options,
   onSelect,
@@ -33,7 +35,10 @@ export function SavedSearchDropdown({
         aria-haspopup="listbox"
         aria-expanded={isOpen}
         aria-label="Saved search presets"
-        className="inline-flex h-8 items-center gap-1.5 rounded-lg bg-gray-100 px-3 text-[13px] font-medium text-text-primary transition-colors hover:bg-(--table-row-child-bg)"
+        className={[
+          "inline-flex h-8 items-center gap-1.5 rounded-lg bg-gray-100 px-3 font-medium text-text-primary transition-colors hover:bg-(--table-row-child-bg)",
+          dropdownTextClass,
+        ].join(" ")}
       >
         <ChevronDown
           className={[
@@ -68,7 +73,10 @@ export function SavedSearchDropdown({
                   }}
                   role="option"
                   aria-selected={isSelected}
-                  className="flex h-8 w-full items-center rounded-md px-2 text-left text-[13px] text-text-primary hover:bg-(--table-row-child-bg)"
+                  className={[
+                    "flex h-8 w-full items-center rounded-md px-2 text-left text-text-primary hover:bg-(--table-row-child-bg)",
+                    dropdownTextClass,
+                  ].join(" ")}
                 >
                   {option.label}
                 </button>
