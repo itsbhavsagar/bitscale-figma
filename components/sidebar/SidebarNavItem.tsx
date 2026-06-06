@@ -47,8 +47,8 @@ export function SidebarNavItem({ item }: SidebarNavItemProps) {
       ) : null}
       <span className="min-w-0 flex-1 truncate">{label}</span>
       {BadgeIcon ? (
-        <span className="flex h-5 w-5 items-center justify-center rounded-full bg-[#FBF1E3]">
-          <BadgeIcon className="h-3 w-3 text-[#D97706]" aria-hidden="true" />
+        <span className="inline-flex h-5 min-w-[34px] items-center justify-center rounded-full bg-[#FBF1E3] px-2.5">
+          <BadgeIcon className="h-3.5 w-3.5 text-[#D97706]" aria-hidden="true" />
         </span>
       ) : null}
       {isActive ? (
