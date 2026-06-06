@@ -29,7 +29,7 @@ export function NewGridModal({ open, onClose, onCreate }: NewGridModalProps) {
       gridTypeOptions.map((option) => ({
         value: option.value,
         label: option.label,
-        icon: <PlatformIcon platform={option.value} size="sm" />,
+        icon: <PlatformIcon platform={option.value} size="xs" />,
       })),
     [],
   );

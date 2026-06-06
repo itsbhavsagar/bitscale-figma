@@ -13,7 +13,21 @@ import type { GridPlatform } from "@/types/grids";
 
 interface PlatformIconProps {
   platform: GridPlatform;
-  size?: "table" | "sm" | "md";
+  size?: "table" | "xs" | "sm" | "md";
+}
+
+function getPlatformIconSizeClass(
+  size: PlatformIconProps["size"],
+  isTable: boolean,
+): string {
+  if (isTable) return "table-platform-icon";
+  if (size === "xs") return "h-3.5 w-3.5";
+  if (size === "sm") return "h-5 w-5";
+  return "h-6 w-6";
+}
+
+function getPlatformGlyphClass(size: PlatformIconProps["size"]): string {
+  return size === "xs" ? "h-1.5 w-1.5 text-white" : "h-2.5 w-2.5 text-white";
 }
 
 const platformImageSrc: Partial<Record<GridPlatform, string>> = {
@@ -47,8 +61,6 @@ const platformStyles: Record<GridPlatform, string> = {
   hubspot: "var(--platform-hubspot)",
   csv: "var(--platform-csv)",
 };
-
-const iconInnerClass = "h-2.5 w-2.5 text-white";
 
 function PlatformImage({
   src,
@@ -161,6 +173,8 @@ function WorkbookStackedIcons() {
 export function PlatformIcon({ platform, size = "md" }: PlatformIconProps) {
   const bg = platformStyles[platform];
   const isTable = size === "table";
+  const sizeClass = getPlatformIconSizeClass(size, isTable);
+  const glyphClass = getPlatformGlyphClass(size);
   const imageSrc = platformImageSrc[platform];
 
   if (platform === "workbook") {
@@ -173,7 +187,9 @@ export function PlatformIcon({ platform, size = "md" }: PlatformIconProps) {
         src={imageSrc}
         alt={platform}
         className={
-          isTable ? "h-full w-full object-contain p-[2px]" : "h-full w-full object-cover"
+          isTable
+            ? "h-full w-full object-contain p-[2px]"
+            : "h-full w-full object-contain"
         }
       />
     );
@@ -182,7 +198,7 @@ export function PlatformIcon({ platform, size = "md" }: PlatformIconProps) {
       <span
         className={[
           "flex shrink-0 items-center justify-center overflow-hidden rounded-[3px]",
-          isTable ? "table-platform-icon" : size === "sm" ? "h-5 w-5" : "h-6 w-6",
+          sizeClass,
           isTable && mutedTablePlatforms.has(platform)
             ? "table-platform-icon--muted"
             : "",
@@ -199,7 +215,7 @@ export function PlatformIcon({ platform, size = "md" }: PlatformIconProps) {
     <span
       className={[
         "flex shrink-0 items-center justify-center rounded-[3px] text-white",
-        isTable ? "table-platform-icon" : size === "sm" ? "h-5 w-5" : "h-6 w-6",
+        sizeClass,
         isTable && mutedTablePlatforms.has(platform)
           ? "table-platform-icon--muted"
           : "",
@@ -213,29 +229,29 @@ export function PlatformIcon({ platform, size = "md" }: PlatformIconProps) {
       }
     >
       {platform === "find-people" && (
-        <Users className={iconInnerClass} aria-hidden="true" />
+        <Users className={glyphClass} aria-hidden="true" />
       )}
       {platform === "apollo" && (
-        <Telescope className={iconInnerClass} aria-hidden="true" />
+        <Telescope className={glyphClass} aria-hidden="true" />
       )}
       {platform === "form" && (
         <Building2
-          className="h-3 w-3"
+          className={size === "xs" ? "h-2 w-2" : "h-3 w-3"}
           style={{ color: "#16a34a" }}
           aria-hidden="true"
         />
       )}
       {platform === "sales-navigator" && (
-        <Search className={iconInnerClass} aria-hidden="true" />
+        <Search className={glyphClass} aria-hidden="true" />
       )}
       {platform === "google-maps" && (
-        <MapPin className={iconInnerClass} aria-hidden="true" />
+        <MapPin className={glyphClass} aria-hidden="true" />
       )}
       {platform === "google-search" && (
-        <Search className={iconInnerClass} aria-hidden="true" />
+        <Search className={glyphClass} aria-hidden="true" />
       )}
       {platform === "factors" && (
-        <Layers className={iconInnerClass} aria-hidden="true" />
+        <Layers className={glyphClass} aria-hidden="true" />
       )}
     </span>
   );

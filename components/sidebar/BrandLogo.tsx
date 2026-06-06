@@ -16,6 +16,7 @@ export function BrandLogo({ brand, className, priority }: BrandLogoProps) {
       width={brand.logoWidth}
       height={brand.logoHeight}
       priority={priority}
+      loading="eager"
       className={className}
     />
   );

@@ -36,7 +36,7 @@ export interface Integration {
 }
 
 export interface IntegrationFilterOption {
-  value: "all" | "connected" | "available";
+  value: "all" | "connected" | "available" | "coming_soon";
   label: string;
 }
 

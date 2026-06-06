@@ -90,7 +90,8 @@ export function LatestFromBitscaleCard() {
                 fill
                 className="object-cover"
                 sizes="152px"
-                loading={activeIndex === 0 ? "eager" : "lazy"}
+                priority={activeIndex === 0}
+                loading="eager"
               />
             ) : (
               <div

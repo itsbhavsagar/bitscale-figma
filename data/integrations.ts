@@ -17,6 +17,7 @@ export const integrationFilterOptions: IntegrationFilterOption[] = [
   { value: "all", label: "All" },
   { value: "connected", label: "Connected" },
   { value: "available", label: "Available" },
+  { value: "coming_soon", label: "Coming Soon" },
 ];
 
 export const integrationData: Integration[] = [

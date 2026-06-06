@@ -39,7 +39,7 @@ export function IntegrationFilters({
           />
 
           <div className="integration-toolbar__select">
-            <Select
+            <Select<IntegrationFilterOption["value"]>
               value={statusFilter}
               onChange={onStatusFilterChange}
               options={integrationFilterOptions}

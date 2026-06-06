@@ -6,18 +6,30 @@ interface UseDismissibleLayerOptions {
   open: boolean;
   onDismiss: () => void;
   rootRef: RefObject<HTMLElement | null>;
+  layerRef?: RefObject<HTMLElement | null>;
+}
+
+function isInsideLayer(
+  target: Node,
+  rootRef: RefObject<HTMLElement | null>,
+  layerRef?: RefObject<HTMLElement | null>,
+) {
+  if (rootRef.current?.contains(target)) return true;
+  if (layerRef?.current?.contains(target)) return true;
+  return false;
 }
 
 export function useDismissibleLayer({
   open,
   onDismiss,
   rootRef,
+  layerRef,
 }: UseDismissibleLayerOptions) {
   useEffect(() => {
     if (!open) return;
 
     const handlePointerDown = (event: MouseEvent) => {
-      if (!rootRef.current?.contains(event.target as Node)) {
+      if (!isInsideLayer(event.target as Node, rootRef, layerRef)) {
         onDismiss();
       }
     };
@@ -35,5 +47,5 @@ export function useDismissibleLayer({
       document.removeEventListener("mousedown", handlePointerDown);
       document.removeEventListener("keydown", handleKeyDown);
     };
-  }, [open, onDismiss, rootRef]);
+  }, [open, onDismiss, rootRef, layerRef]);
 }

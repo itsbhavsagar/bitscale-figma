@@ -459,7 +459,7 @@ button:disabled,
 .form-field__textarea:focus {
   outline: none;
   border-color: var(--primary-blue);
-  box-shadow: 0 0 0 1px var(--primary-blue);
+  box-shadow: none;
 }
 
 .form-select {
@@ -489,7 +489,7 @@ button:disabled,
 .form-select__trigger:focus-visible {
   outline: none;
   border-color: var(--primary-blue);
-  box-shadow: 0 0 0 1px var(--primary-blue);
+  box-shadow: none;
 }
 
 .form-select__value {
@@ -521,7 +521,7 @@ button:disabled,
 }
 
 .form-select__menu {
-  z-index: 60;
+  z-index: 90;
   max-height: 240px;
   overflow-y: auto;
   border: 1px solid var(--border-color);
@@ -1154,13 +1154,13 @@ button:disabled,
 .search-input:focus {
   outline: none;
   border-color: var(--primary-blue);
-  box-shadow: 0 0 0 0.5px var(--primary-blue);
+  box-shadow: none;
   background-color: var(--background);
 }
 
 .search-input-wrapper:focus-within .search-input {
   border-color: var(--primary-blue);
-  box-shadow: 0 0 0 0.5px var(--primary-blue);
+  box-shadow: none;
   background-color: var(--background);
 }
 
