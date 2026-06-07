@@ -1,9 +1,9 @@
 "use client";
 
-import { useEffect, type ReactNode } from "react";
-import { createPortal } from "react-dom";
 import { AnimatePresence, motion } from "framer-motion";
 import { X } from "lucide-react";
+import { useEffect, type ReactNode } from "react";
+import { createPortal } from "react-dom";
 
 interface ModalProps {
   open: boolean;
@@ -23,9 +23,9 @@ const sizeClasses = {
 };
 
 const closeButtonBaseClass =
-  "inline-flex h-8 w-8 items-center justify-center rounded-full bg-[#E5E7EB] text-[#101828] hover:bg-[#DDE0E4]";
+  "inline-flex h-5 w-5 items-center justify-center rounded-full bg-[#E5E7EB] text-[#101828] hover:bg-[#DDE0E4]";
 
-const closeIconClass = "h-4 w-4 text-[#101828]";
+const closeIconClass = "h-3 w-3 text-[#101828]";
 
 export function Modal({
   open,

@@ -1,8 +1,8 @@
 "use client";
 
-import { useMemo, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { ArrowUpDown, ChevronLeft, ChevronRight, X } from "lucide-react";
+import { ChevronLeft, ChevronRight, X } from "lucide-react";
+import { useMemo, useState } from "react";
 
 import type { SearchTableRow } from "@/types/mock-search";
 
@@ -16,22 +16,22 @@ interface ResultsTableProps {
   pageSize?: number;
 }
 
-type SortDirection = "asc" | "desc";
-
-function normalizeForSort(value: string): string | number {
-  const numeric = Number(value.replace(/[^0-9.]/g, ""));
-  if (!Number.isNaN(numeric) && value.match(/[0-9]/)) return numeric;
-  return value.toLowerCase();
-}
-
-function SkeletonRows({ columns, count }: { columns: string[]; count: number }) {
+function SkeletonRows({
+  columns,
+  count,
+}: {
+  columns: string[];
+  count: number;
+}) {
   return (
     <div className="flex flex-col">
       {Array.from({ length: count }).map((_, rowIndex) => (
         <div
           key={`skeleton-row-${rowIndex}`}
           className="grid h-10 animate-pulse items-center gap-4 border-b border-(--table-row-border-color) px-5"
-          style={{ gridTemplateColumns: `repeat(${columns.length}, minmax(0, 1fr))` }}
+          style={{
+            gridTemplateColumns: `repeat(${columns.length}, minmax(0, 1fr))`,
+          }}
         >
           {columns.map((column, columnIndex) => (
             <span
@@ -55,28 +55,14 @@ export function ResultsTable({
   pageSize = 8,
 }: ResultsTableProps) {
   const [page, setPage] = useState(1);
-  const [sortColumn, setSortColumn] = useState<number>(0);
-  const [sortDirection, setSortDirection] = useState<SortDirection>("asc");
   const [selectedRow, setSelectedRow] = useState<SearchTableRow | null>(null);
 
-  const sortedRows = useMemo(() => {
-    const nextRows = [...rows];
-    nextRows.sort((a, b) => {
-      const left = normalizeForSort(a.cells[sortColumn] ?? "");
-      const right = normalizeForSort(b.cells[sortColumn] ?? "");
-      if (left === right) return 0;
-      if (sortDirection === "asc") return left > right ? 1 : -1;
-      return left < right ? 1 : -1;
-    });
-    return nextRows;
-  }, [rows, sortColumn, sortDirection]);
-
-  const pageCount = Math.max(1, Math.ceil(sortedRows.length / pageSize));
+  const pageCount = Math.max(1, Math.ceil(rows.length / pageSize));
 
   const pagedRows = useMemo(() => {
     const start = (page - 1) * pageSize;
-    return sortedRows.slice(start, start + pageSize);
-  }, [page, pageSize, sortedRows]);
+    return rows.slice(start, start + pageSize);
+  }, [page, pageSize, rows]);
 
   const canGoPrev = page > 1;
   const canGoNext = page < pageCount;
@@ -86,30 +72,6 @@ export function ResultsTable({
   return (
     <div className="relative flex h-full flex-col overflow-hidden">
       <div className="flex-1 overflow-auto">
-        <div
-          className="sticky top-0 z-10 grid gap-4 border-b border-border bg-background px-5 py-2.5"
-          style={{ gridTemplateColumns: `repeat(${columns.length}, minmax(0, 1fr))` }}
-        >
-          {columns.map((column, index) => (
-            <button
-              key={`${column}-${index}`}
-              type="button"
-              className="inline-flex items-center gap-1 truncate text-left text-[11px] font-medium tracking-wide text-text-secondary"
-              onClick={() => {
-                if (sortColumn === index) {
-                  setSortDirection((current) => (current === "asc" ? "desc" : "asc"));
-                } else {
-                  setSortColumn(index);
-                  setSortDirection("asc");
-                }
-              }}
-            >
-              {column}
-              <ArrowUpDown className="h-3 w-3 shrink-0 text-text-secondary" />
-            </button>
-          ))}
-        </div>
-
         <AnimatePresence mode="wait">
           {loading ? (
             <motion.div
@@ -178,7 +140,7 @@ export function ResultsTable({
           >
             <ChevronLeft className="h-4 w-4" />
           </button>
-          <span className="inline-flex h-7 min-w-[28px] items-center justify-center rounded-md bg-(--table-row-child-bg) px-2 text-[12px] font-medium text-text-primary">
+          <span className="inline-flex h-7 min-w-7 items-center justify-center rounded-md bg-(--table-row-child-bg) px-2 text-[12px] font-medium text-text-primary">
             {page}
           </span>
           <button
@@ -196,14 +158,16 @@ export function ResultsTable({
       <AnimatePresence>
         {selectedRow ? (
           <motion.aside
-            className="results-details-panel absolute inset-y-0 right-0 z-20 w-[280px] border-l border-border bg-background p-4 shadow-[-4px_0_12px_rgba(0,0,0,0.08)]"
+            className="results-details-panel absolute inset-y-0 right-0 z-20 w-70 border-l border-border bg-background p-4 shadow-[-4px_0_12px_rgba(0,0,0,0.08)]"
             initial={{ x: 24, opacity: 0 }}
             animate={{ x: 0, opacity: 1 }}
             exit={{ x: 24, opacity: 0 }}
             transition={{ duration: 0.2 }}
           >
             <div className="mb-3 flex items-center justify-between">
-              <h3 className="text-[14px] font-semibold text-text-primary">Details</h3>
+              <h3 className="text-[14px] font-semibold text-text-primary">
+                Details
+              </h3>
               <button
                 type="button"
                 onClick={() => setSelectedRow(null)}
@@ -217,7 +181,9 @@ export function ResultsTable({
             <div className="space-y-3">
               {columns.map((column, index) => (
                 <div key={`${selectedRow.id}-${column}`}>
-                  <p className="text-[11px] font-medium text-text-secondary">{column}</p>
+                  <p className="text-[11px] font-medium text-text-secondary">
+                    {column}
+                  </p>
                   <p className="mt-0.5 text-[13px] text-text-primary">
                     {selectedRow.cells[index] ?? "-"}
                   </p>

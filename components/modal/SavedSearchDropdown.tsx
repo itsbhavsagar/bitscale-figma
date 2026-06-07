@@ -1,8 +1,8 @@
 "use client";
 
-import { useRef, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { ChevronDown } from "lucide-react";
+import { useRef, useState } from "react";
 
 import { useDismissibleLayer } from "@/hooks/useDismissibleLayer";
 import type { SavedSearchPreset } from "@/types/mock-search";
@@ -12,7 +12,7 @@ interface SavedSearchDropdownProps {
   onSelect: (preset: SavedSearchPreset) => void;
 }
 
-const dropdownTextClass = "text-[12px]";
+const dropdownTextClass = "text-[10px]";
 
 export function SavedSearchDropdown({
   options,
@@ -36,23 +36,23 @@ export function SavedSearchDropdown({
         aria-expanded={isOpen}
         aria-label="Saved search presets"
         className={[
-          "inline-flex h-8 items-center gap-1.5 rounded-lg bg-gray-100 px-3 font-medium text-text-primary transition-colors hover:bg-(--table-row-child-bg)",
+          "inline-flex h-5.5 w-29.25 items-center gap-1 rounded-md bg-gray-100 px-2.5 py-0.5 font-medium text-text-dark transition-colors hover:bg-(--table-row-child-bg)",
           dropdownTextClass,
         ].join(" ")}
       >
         <ChevronDown
           className={[
-            "h-3.5 w-3.5 text-text-secondary transition-transform",
+            "h-3 w-3 text-text-dark transition-transform",
             isOpen ? "rotate-180" : "",
           ].join(" ")}
         />
-        <span className="max-w-[132px] truncate">{label}</span>
+        <span className="max-w-33 truncate">{label}</span>
       </button>
 
       <AnimatePresence>
         {isOpen ? (
           <motion.div
-            className="absolute right-0 top-[calc(100%+4px)] z-20 w-[200px] rounded-lg border border-border bg-background p-1 shadow-[0_4px_12px_rgba(0,0,0,0.08)]"
+            className="absolute right-0 top-[calc(100%+4px)] z-20 w-50 rounded-lg border border-border bg-background p-1 shadow-[0_4px_12px_rgba(0,0,0,0.08)]"
             role="listbox"
             aria-label="Saved searches"
             initial={{ opacity: 0, y: -6, scale: 0.98 }}
@@ -74,7 +74,7 @@ export function SavedSearchDropdown({
                   role="option"
                   aria-selected={isSelected}
                   className={[
-                    "flex h-8 w-full items-center rounded-md px-2 text-left text-text-primary hover:bg-(--table-row-child-bg)",
+                    "flex h-8 w-full items-center rounded-md px-2 text-left text-text-dark hover:bg-(--table-row-child-bg)",
                     dropdownTextClass,
                   ].join(" ")}
                 >

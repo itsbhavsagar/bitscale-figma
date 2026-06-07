@@ -1,14 +1,16 @@
 "use client";
 
-import { useState, type ReactNode } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { ChevronDown, Search } from "lucide-react";
+import { useState, type ReactNode } from "react";
 
 import type { FilterSectionConfig } from "@/types/filters";
 
-const modalHeadingClass = "text-[16px] font-semibold leading-[22px] text-text-primary";
-const filterTextShiftClass = "relative left-[-4px]";
-const filterSearchRowClass = "mt-1 flex items-center gap-2 border-b border-border pb-2";
+const modalHeadingClass =
+  "text-[18px] font-extrabold leading-[150%] text-text-dark";
+const filterTextShiftClass = "relative left-[-2px]";
+const filterSearchRowClass =
+  "mt-1 flex items-center gap-2 border-b-2 border-border pb-2";
 
 interface FilterSectionProps {
   config: FilterSectionConfig;
@@ -19,18 +21,20 @@ interface FilterSectionProps {
 function FilterSection({ config, value, onChange }: FilterSectionProps) {
   const { label, icon: Icon, placeholder, defaultOpen = false } = config;
   const inputId = `filter-input-${config.id}`;
-  
+
   if (defaultOpen) {
     return (
-      <div className="px-4 py-3">
+      <div className="px-3 py-3">
         <div className="flex items-center gap-2">
-          <Icon className="h-[18px] w-[18px] shrink-0 text-text-primary" />
-          <span className={`${filterTextShiftClass} text-[14px] font-semibold text-text-primary`}>
+          <Icon className="h-4.5 w-4.5 shrink-0 text-text-dark" />
+          <span
+            className={`${filterTextShiftClass} text-[14px] font-semibold leading-[150%] text-text-dark`}
+          >
             {label}
           </span>
         </div>
         <div className={filterSearchRowClass}>
-          <Search className="h-4 w-4 shrink-0 text-text-secondary" />
+          <Search className="h-4 w-4 shrink-0 text-text-dark" />
           <label htmlFor={inputId} className="sr-only">
             {label}
           </label>
@@ -40,7 +44,7 @@ function FilterSection({ config, value, onChange }: FilterSectionProps) {
             value={value}
             onChange={(event) => onChange(event.target.value)}
             placeholder={placeholder}
-            className="w-full appearance-none border-0 bg-transparent p-0 text-[14px] text-text-primary placeholder:text-text-secondary shadow-none outline-none ring-0 focus:outline-none focus:ring-0 focus-visible:outline-none focus-visible:ring-0"
+            className="w-full appearance-none border-0 bg-transparent p-0 text-[12px] text-text-dark placeholder:text-text-secondary shadow-none outline-none ring-0 focus:outline-none focus:ring-0 focus-visible:outline-none focus-visible:ring-0"
             style={{ border: 0, outline: 0, boxShadow: "none" }}
           />
         </div>
@@ -48,7 +52,13 @@ function FilterSection({ config, value, onChange }: FilterSectionProps) {
     );
   }
 
-  return <CollapsibleFilterSection config={config} value={value} onChange={onChange} />;
+  return (
+    <CollapsibleFilterSection
+      config={config}
+      value={value}
+      onChange={onChange}
+    />
+  );
 }
 
 function CollapsibleFilterSection({
@@ -68,25 +78,27 @@ function CollapsibleFilterSection({
         onClick={() => setIsOpen((open) => !open)}
         aria-expanded={isOpen}
         aria-controls={contentId}
-        className="flex w-full items-start gap-2 px-4 py-4 text-left hover:bg-[#F9FAFB]"
+        className="flex w-full items-start gap-2 px-3 py-3 text-left hover:bg-[#F9FAFB]"
         whileTap={{ scale: 0.99 }}
       >
         <span className="flex flex-1 flex-col gap-2">
           <span className="flex items-start justify-between gap-2">
             <span className="flex items-center gap-2">
-              <Icon className="mt-0.5 h-[18px] w-[18px] shrink-0 text-text-primary" />
-              <span className={`block text-[14px] font-semibold text-text-primary ${filterTextShiftClass}`}>
+              <Icon className="mt-0.5 h-4.5 w-4.5 shrink-0 text-text-dark" />
+              <span
+                className={`block text-[14px] font-semibold leading-[150%] text-text-dark ${filterTextShiftClass}`}
+              >
                 {label}
               </span>
             </span>
             <ChevronDown
-              className={`mt-0.5 h-4 w-4 shrink-0 text-text-secondary transition-transform ${
+              className={`mt-0.5 h-4 w-4 shrink-0 text-text-dark transition-transform ${
                 isOpen ? "rotate-180" : ""
               }`}
             />
           </span>
           {!isOpen ? (
-            <span className="block text-[12px] text-text-secondary">
+            <span className="block text-[10px] text-text-secondary">
               {placeholder}
             </span>
           ) : null}
@@ -97,7 +109,7 @@ function CollapsibleFilterSection({
         {isOpen ? (
           <motion.div
             id={contentId}
-            className="px-4 pb-3"
+            className="px-3 pb-3"
             initial={{ height: 0, opacity: 0 }}
             animate={{ height: "auto", opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
@@ -113,7 +125,7 @@ function CollapsibleFilterSection({
                 value={value}
                 onChange={(event) => onChange(event.target.value)}
                 placeholder={placeholder}
-                className="w-full appearance-none border-0 bg-transparent p-0 text-[14px] text-text-primary placeholder:text-text-secondary shadow-none outline-none ring-0 focus:outline-none focus:ring-0 focus-visible:outline-none focus-visible:ring-0"
+                className="w-full appearance-none border-0 bg-transparent p-0 text-[12px] text-text-dark placeholder:text-text-secondary shadow-none outline-none ring-0 focus:outline-none focus:ring-0 focus-visible:outline-none focus-visible:ring-0"
                 style={{ border: 0, outline: 0, boxShadow: "none" }}
               />
             </div>
@@ -122,7 +134,7 @@ function CollapsibleFilterSection({
       </AnimatePresence>
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute bottom-0 left-0 right-0 ml-4 border-b border-border"
+        className="pointer-events-none absolute inset-x-3 bottom-0 border-b border-border"
       />
     </div>
   );
@@ -146,17 +158,13 @@ export function FilterPanel({
   headerAction,
 }: FilterPanelProps) {
   return (
-    <div className="lead-search-filter-panel ml-8 mt-8 mb-[18px] flex h-[668px] w-[319px] shrink-0 flex-col bg-background pl-2">
+    <div className="lead-search-filter-panel flex h-full w-78.5 shrink-0 flex-col bg-background">
       {title || headerAction ? (
-        <div className="flex shrink-0 items-center justify-between gap-[5px] px-4 pb-3 pt-0 mt-[-2px]">
-          {title ? (
-            <h2 className={`${modalHeadingClass} relative left-[-6px]`}>
-              {title}
-            </h2>
-          ) : (
-            <span />
-          )}
-          {headerAction ? <div className="relative left-[9px]">{headerAction}</div> : null}
+        <div className="flex shrink-0 items-center justify-between gap-1.25 px-3 pb-3 pt-2 mt-0">
+          {title ? <h2 className={modalHeadingClass}>{title}</h2> : <span />}
+          {headerAction ? (
+            <div className="relative left-1">{headerAction}</div>
+          ) : null}
         </div>
       ) : null}
       <div className="flex-1 overflow-y-auto">
@@ -169,8 +177,8 @@ export function FilterPanel({
           />
         ))}
       </div>
-      <div className="flex shrink-0 justify-center py-3">
-        <div className="lead-search-filter-footer flex h-[34px] w-[314px] items-center gap-4">
+      <div className="flex shrink-0 justify-start px-3 py-3">
+        <div className="lead-search-filter-footer flex h-8.5 w-full items-center gap-3">
           {footer}
         </div>
       </div>

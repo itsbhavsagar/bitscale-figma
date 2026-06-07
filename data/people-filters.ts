@@ -36,13 +36,13 @@ export const peopleFiltersConfig: PeopleFiltersConfig = {
     {
       id: "person-location",
       label: "Person Location",
-      icon: MapPin,
+      icon: MapPinned,
       placeholder: "Eg: London, Great New York City",
     },
     {
       id: "company-location",
       label: "Company Location",
-      icon: MapPinned,
+      icon: MapPin,
       placeholder: "E.g: United States, UAE",
     },
     {
@@ -66,13 +66,7 @@ export const peopleFiltersConfig: PeopleFiltersConfig = {
   emptyStateTitle: "Start your people search",
   emptyStateDescription:
     "Start your people search, preview, and import contacts for enrichment by applying any filter in the left panel.\nOR\nImport contacts from a saved search.",
-  tableColumns: [
-    "NAME",
-    "TITLE",
-    "COMPANY",
-    "LINKEDIN URL",
-    "LOCATION",
-  ],
+  tableColumns: ["NAME", "TITLE", "COMPANY", "LINKEDIN URL", "LOCATION"],
 };
 
 export const peopleSavedSearches: SavedSearchPreset[] = [
